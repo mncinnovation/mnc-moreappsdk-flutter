@@ -27,7 +27,7 @@ This lib currently using material theme, if you flutter app using cuppertino app
 ### [](#1-add-dependency)1. Add dependency
 
 	mncsso:
-	    git: https://mnc-repo.mncdigital.com/mobiledevadmin/mnc-ssosdk-flutter
+	    git: https://gitlab.com/innocent.dev/mncapps
 		
 ### [](#1-platform-spec)2. Platform specific
 #### iOS
