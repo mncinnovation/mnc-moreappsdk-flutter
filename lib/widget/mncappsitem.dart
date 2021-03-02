@@ -86,7 +86,6 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
               ),
             ),
             Container(
-              width: 75,
               margin: EdgeInsets.only(left: 8),
               child: RaisedButton(
                 color: widget.layoutModel?.buttonColor != null ? HexColor.fromHex(widget.layoutModel.buttonColor) : Colors.blue,
@@ -96,6 +95,7 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
                 onPressed: () => openFunction(context: context, installed: installed, data: widget.data),
                 child: Text(
                   butttonText,
+                  maxLines: 1,
                   style: TextStyle(
                     color: widget.layoutModel?.buttonTextColor != null ? HexColor.fromHex(widget.layoutModel?.buttonTextColor) : Colors.white,
                     fontSize: 10,

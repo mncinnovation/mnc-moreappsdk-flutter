@@ -21,7 +21,7 @@ class _MNCapps {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     LibInterface.currentUserID = userID;
     LibInterface.packageName = packageInfo.packageName;
-    LibInterface.cachingStrategy = cachingStrategy ?? CachingStrategy.Monthly;
+    LibInterface.cachingStrategy = cachingStrategy ?? CachingStrategy.None;
   }
 }
 
