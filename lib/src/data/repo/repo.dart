@@ -1,11 +1,11 @@
-import 'package:mncapps/data/interface/libinterface.dart';
-import 'package:mncapps/data/model/cachingstrategy.dart';
-import 'package:mncapps/data/model/responsedata.dart';
-import 'package:mncapps/data/service/service.dart';
-import 'package:mncapps/data/sharepref/sharedpref.dart';
+import '../interface/libinterface.dart';
+import '../model/cachingstrategy.dart';
+import '../model/responsedata.dart';
+import '../service/service.dart';
+import '../sharepref/sharedpref.dart';
 
 abstract class Repo with SharedPref, Service {
-  Future<ResponseData> getDataRepo() async {
+  Future<ResponseData?> getDataRepo() async {
     try {
       if (LibInterface.cachingStrategy == CachingStrategy.None) {
         //Network

@@ -1,23 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:mncapps/data/interface/mncappsdatainterface.dart';
-import 'package:mncapps/data/model/appsmodel.dart';
-import 'package:mncapps/data/model/layoutmodel.dart';
-import 'package:mncapps/widget/mncappsitem.dart';
+
+import 'package:mncapps/src/data/interface/libinterface.dart';
+import 'package:mncapps/src/data/model/cachingstrategy.dart';
+import 'package:package_info/package_info.dart';
+
+import '../data/interface/mncappsdatainterface.dart';
+import '../data/model/appsmodel.dart';
+import '../data/model/layoutmodel.dart';
+import 'mncappsitem.dart';
 
 class MNCAppsBody extends StatefulWidget {
+  final String userID;
+  final CachingStrategy? cachingStrategy;
+  const MNCAppsBody({
+    Key? key,
+    required this.userID,
+    this.cachingStrategy,
+  }) : super(key: key);
   @override
   _MNCAppsBodyState createState() => _MNCAppsBodyState();
 }
 
 class _MNCAppsBodyState extends State<MNCAppsBody> {
-  List<AppsModel> items = [];
-  LayoutModel layout;
+  List<AppsModel>? items = [];
+  LayoutModel? layout;
   MNCAppsDataInterface _dataInterface = MNCAppsDataInterface();
-  String error;
+  String? error;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  init() async {
+    LibInterface.currentUserID = widget.userID;
+    LibInterface.cachingStrategy = widget.cachingStrategy ?? CachingStrategy.None;
+    PackageInfo info = await PackageInfo.fromPlatform();
+    LibInterface.packageName = info.packageName;
     getData();
   }
 
@@ -25,7 +44,7 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
     try {
       final data = await _dataInterface.getDataRepo();
       setState(() {
-        items = data.items;
+        items = data!.items;
         layout = data.layoutModel;
       });
     } catch (e) {
@@ -38,7 +57,7 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
   Widget build(BuildContext context) {
     if (items == null) return _ErrorWidget();
 
-    if (items.isEmpty) {
+    if (items!.isEmpty) {
       return Container();
     }
 
@@ -51,21 +70,21 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
             crossAxisSpacing: 8,
           ),
           padding: EdgeInsets.all(16),
-          itemCount: items.length,
+          itemCount: items!.length,
           itemBuilder: (context, i) {
             return MoreAppsItem(
-              data: items[i],
+              data: items![i],
               layoutModel: layout,
             );
           },
         );
       }
       return ListView.builder(
-          itemCount: items.length,
+          itemCount: items!.length,
           padding: EdgeInsets.all(16),
           itemBuilder: (context, i) {
             return MoreAppsItem(
-              data: items[i],
+              data: items![i],
               layoutModel: layout,
             );
           });

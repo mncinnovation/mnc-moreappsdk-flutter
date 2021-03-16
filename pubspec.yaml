@@ -1,23 +1,24 @@
 name: mncapps
 description: MNC Apps Flutter SDK
-version: 0.2.0
+version: 2.0.0
 author: handi.deyana@mncgroup.com
 homepage: none
 publish_to: none
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.2
-  shared_preferences: ^0.5.12+4
-  url_launcher: ^5.7.10
-  webview_flutter: ^1.0.7
-  package_info: ^0.4.3+4
-  device_apps: ^1.2.0
+  http: ^0.13.0
+  shared_preferences: ^2.0.4
+  url_launcher: ^6.0.2
+  webview_flutter: ^2.0.2
+  package_info: ^2.0.0
+  device_apps:
+    git: https://github.com/fluttercuba/flutter_plugin_device_apps.git
 
 dev_dependencies:
   flutter_test:

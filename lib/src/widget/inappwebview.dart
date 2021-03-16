@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mncapps/data/constant/constant.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../data/constant/constant.dart';
 
-class InAppWebview extends StatefulWidget {
-  final String url;
-  const InAppWebview({Key key, this.url}) : super(key: key);
+class MncAppsInAppWebview extends StatefulWidget {
+  final String? url;
+  const MncAppsInAppWebview({Key? key, this.url}) : super(key: key);
   @override
-  _InAppWebviewState createState() => _InAppWebviewState();
+  _MncAppsInAppWebviewState createState() => _MncAppsInAppWebviewState();
 }
 
-class _InAppWebviewState extends State<InAppWebview> {
+class _MncAppsInAppWebviewState extends State<MncAppsInAppWebview> {
   bool loading = true;
   bool isLight = true;
 

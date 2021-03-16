@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 class AppsModel {
-  String appID;
-  String appName;
-  String webUrl;
-  String youtube;
-  String image;
-  String open;
-  int order;
-  Translation category;
-  Translation description;
-  AppMeta android;
-  AppMeta ios;
+  String? appID;
+  String? appName;
+  String? webUrl;
+  String? youtube;
+  String? image;
+  String? open;
+  int? order;
+  Translation? category;
+  Translation? description;
+  AppMeta? android;
+  AppMeta? ios;
   AppsModel({
     this.appID,
     this.appName,
@@ -43,8 +43,6 @@ class AppsModel {
   }
 
   factory AppsModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AppsModel(
       appID: map['appID'],
       appName: map['appName'],
@@ -66,8 +64,8 @@ class AppsModel {
 }
 
 class AppMeta {
-  String scheme;
-  String store;
+  String? scheme;
+  String? store;
   AppMeta({
     this.scheme,
     this.store,
@@ -81,8 +79,6 @@ class AppMeta {
   }
 
   factory AppMeta.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return AppMeta(
       scheme: map['scheme'],
       store: map['store'],
@@ -95,8 +91,8 @@ class AppMeta {
 }
 
 class Translation {
-  String en;
-  String id;
+  String? en;
+  String? id;
   Translation({
     this.en,
     this.id,
@@ -110,8 +106,6 @@ class Translation {
   }
 
   factory Translation.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return Translation(
       en: map['en'],
       id: map['id'],

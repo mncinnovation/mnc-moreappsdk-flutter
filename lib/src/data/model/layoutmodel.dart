@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 class LayoutModel {
-  String layoutType;
-  int cardShadowOpacity;
-  int cardRoundedSize;
-  String buttonColor;
-  String buttonTextColor;
-  int buttonRoundedSize;
-  int buttonShadow;
+  String? layoutType;
+  int? cardShadowOpacity;
+  int? cardRoundedSize;
+  String? buttonColor;
+  String? buttonTextColor;
+  int? buttonRoundedSize;
+  int? buttonShadow;
   LayoutModel({
     this.layoutType,
     this.cardShadowOpacity,
@@ -31,8 +31,6 @@ class LayoutModel {
   }
 
   factory LayoutModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return LayoutModel(
       layoutType: map['layoutType'],
       cardShadowOpacity: map['cardShadowOpacity'],

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mncapps/data/constant/constant.dart';
-import 'package:mncapps/widget/mncappsbody.dart';
+
+import '../data/constant/constant.dart';
+import 'mncappsbody.dart';
 
 class MNCAppsScreen extends StatefulWidget {
-  final bool isLight;
+  final bool? isLight;
+  final String userID;
 
-  const MNCAppsScreen({Key key, this.isLight}) : super(key: key);
+  const MNCAppsScreen({
+    Key? key,
+    this.isLight,
+    required this.userID,
+  }) : super(key: key);
 
   @override
   _MNCAppsScreenState createState() => _MNCAppsScreenState();
@@ -36,7 +42,9 @@ class _MNCAppsScreenState extends State<MNCAppsScreen> {
             iconTheme: IconThemeData(color: isLight ? Colors.black : Colors.white),
             title: Image.network(Constant.mnclogotext, width: 100, color: isLight ? Colors.black : Colors.white),
           ),
-          body: MNCAppsBody(),
+          body: MNCAppsBody(
+            userID: widget.userID,
+          ),
         );
       }),
     );

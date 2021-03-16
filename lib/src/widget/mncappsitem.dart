@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mncapps/data/model/appsmodel.dart';
-import 'package:mncapps/data/model/layoutmodel.dart';
-import 'package:mncapps/utils/buttonutils.dart';
-import 'package:mncapps/utils/hexcolor.dart';
-import 'package:mncapps/utils/layoututils.dart';
+import '../data/model/appsmodel.dart' show AppsModel;
+import '../data/model/layoutmodel.dart' show LayoutModel;
+import '../utils/buttonutils.dart' show ButtonUtils;
+import '../utils/hexcolor.dart' show HexColor;
+import '../utils/layoututils.dart';
 
 class MoreAppsItem extends StatefulWidget {
-  final AppsModel data;
-  final LayoutModel layoutModel;
+  final AppsModel? data;
+  final LayoutModel? layoutModel;
   MoreAppsItem({this.data, this.layoutModel});
 
   @override
@@ -26,7 +26,7 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
 
   init() async {
     installed = await getInstalledStatus(data: widget.data);
-    butttonText = await getButtonLabel(data: widget.data, installed: installed);
+    butttonText = await getButtonLabel(data: widget.data!, installed: installed);
     setState(() {});
   }
 
@@ -41,7 +41,7 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
           borderRadius: widget.layoutModel?.cardRoundedSize?.getRoundSize() ?? BorderRadius.circular(4.0),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).brightness == Brightness.light ? Colors.grey[200] : Colors.black38,
+              color: Theme.of(context).brightness == Brightness.light ? Colors.grey[200]! : Colors.black38,
               spreadRadius: 1,
               blurRadius: 4,
               offset: Offset(0, 3), // changes position of shadow
@@ -55,7 +55,7 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
               width: 50,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(widget.data.image),
+                child: Image.network(widget.data!.image!),
               ),
             ),
             SizedBox(width: 16),
@@ -87,17 +87,21 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
             ),
             Container(
               margin: EdgeInsets.only(left: 8),
-              child: RaisedButton(
-                color: widget.layoutModel?.buttonColor != null ? HexColor.fromHex(widget.layoutModel.buttonColor) : Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: widget.layoutModel?.buttonRoundedSize?.getRoundSize() ?? BorderRadius.circular(4.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(widget.layoutModel?.buttonColor != null ? HexColor.fromHex(widget.layoutModel!.buttonColor!) : Colors.blue),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: widget.layoutModel?.buttonRoundedSize?.getRoundSize() ?? BorderRadius.circular(4.0),
+                    ),
+                  ),
                 ),
                 onPressed: () => openFunction(context: context, installed: installed, data: widget.data),
                 child: Text(
                   butttonText,
                   maxLines: 1,
                   style: TextStyle(
-                    color: widget.layoutModel?.buttonTextColor != null ? HexColor.fromHex(widget.layoutModel?.buttonTextColor) : Colors.white,
+                    color: HexColor.fromHex(widget.layoutModel?.buttonTextColor ?? "FFFFFF"),
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),

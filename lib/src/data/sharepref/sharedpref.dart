@@ -1,9 +1,9 @@
-import 'package:mncapps/data/constant/constant.dart';
-import 'package:mncapps/data/model/responsedata.dart';
+import '../constant/constant.dart';
+import '../model/responsedata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin SharedPref {
-  Future<ResponseData> getDataSP() async {
+  Future<ResponseData?> getDataSP() async {
     try {
       SharedPreferences sp = await SharedPreferences.getInstance();
       final data = sp.getString(Constant.sharedPrefData);
@@ -23,7 +23,7 @@ mixin SharedPref {
     }
   }
 
-  Future<DateTime> getDataSavedTimeSP() async {
+  Future<DateTime?> getDataSavedTimeSP() async {
     try {
       SharedPreferences sp = await SharedPreferences.getInstance();
       final data = sp.getString(Constant.sharedPrefLastSaved);
