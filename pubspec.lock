@@ -46,11 +46,9 @@ packages:
   device_apps:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "14a7d718eb2161d444cd2369017a469d0ab4f67d"
-      url: "https://github.com/fluttercuba/flutter_plugin_device_apps.git"
-    source: git
+      name: device_apps
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "2.0.0"
   fake_async:
     dependency: transitive
