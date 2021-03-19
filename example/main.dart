@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mncapps/mncapps.dart';
+import 'package:mncapps/src/data/model/cachingstrategy.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -22,6 +23,7 @@ class MyHomePage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => MNCAppsScreen(
                     userID: "YOUR USER ID",
+                    cachingStrategy: CachingStrategy.Weekly,
                   ),
                 ),
               );
@@ -32,6 +34,7 @@ class MyHomePage extends StatelessWidget {
       //Example Implemented in body of widget
       body: MNCAppsBody(
         userID: "YOUR USER ID",
+        cachingStrategy: CachingStrategy.Weekly,
       ),
     );
   }

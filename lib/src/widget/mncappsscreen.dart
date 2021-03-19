@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mncapps/src/data/model/cachingstrategy.dart';
 
 import '../data/constant/constant.dart';
 import 'mncappsbody.dart';
 
 class MNCAppsScreen extends StatefulWidget {
-  final bool? isLight;
+  final CachingStrategy? cachingStrategy;
   final String userID;
 
   const MNCAppsScreen({
     Key? key,
-    this.isLight,
+    this.cachingStrategy,
     required this.userID,
   }) : super(key: key);
 
@@ -26,7 +27,7 @@ class _MNCAppsScreenState extends State<MNCAppsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    isLight = widget.isLight ?? Theme.of(context).brightness == Brightness.light;
+    isLight = Theme.of(context).brightness == Brightness.light;
 
     return Theme(
       data: Theme.of(context).copyWith(
@@ -44,6 +45,7 @@ class _MNCAppsScreenState extends State<MNCAppsScreen> {
           ),
           body: MNCAppsBody(
             userID: widget.userID,
+            cachingStrategy: widget.cachingStrategy,
           ),
         );
       }),
