@@ -4,6 +4,7 @@ import 'package:mncapps/src/data/model/cachingstrategy.dart';
 import '../data/constant/constant.dart';
 import 'mncappsbody.dart';
 
+/// Use fullscreen mncapps
 class MNCAppsScreen extends StatefulWidget {
   final CachingStrategy? cachingStrategy;
   final String userID;

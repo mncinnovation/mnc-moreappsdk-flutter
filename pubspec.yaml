@@ -1,7 +1,7 @@
 name: mncapps
-description: MNC Apps Flutter SDK
+description: SDK to help you discover, and manage all MNC Apps to display it on your application
 version: 2.3.0
-homepage: "https://mobile.mncinnovation.id"
+homepage: "https://mncinnovation.app"
 repository: https://github.com/mncinnovation/mnc-moreappsdk-flutter
 
 environment:

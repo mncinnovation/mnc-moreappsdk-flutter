@@ -1,3 +1,4 @@
+/// Add cache to this mncapps
 enum CachingStrategy { None, Weekly, Monthly }
 
 extension CachgingStrategyUtils on CachingStrategy? {

@@ -10,6 +10,7 @@ import '../data/model/appsmodel.dart';
 import '../data/model/layoutmodel.dart';
 import 'mncappsitem.dart';
 
+/// Use this widget if you dont want to use app at all
 class MNCAppsBody extends StatefulWidget {
   final String userID;
   final CachingStrategy? cachingStrategy;
