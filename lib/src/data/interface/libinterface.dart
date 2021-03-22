@@ -1,7 +1,12 @@
 import '../model/cachingstrategy.dart';
 
 class LibInterface {
-  static String? currentUserID;
-  static String? packageName;
-  static CachingStrategy? cachingStrategy;
+  String? currentUserID;
+  String? packageName;
+  CachingStrategy? cachingStrategy;
+  LibInterface({
+    this.currentUserID,
+    this.packageName,
+    this.cachingStrategy,
+  });
 }

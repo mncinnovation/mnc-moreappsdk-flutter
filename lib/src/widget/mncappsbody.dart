@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 
 import 'package:mncapps/src/data/interface/libinterface.dart';
 import 'package:mncapps/src/data/model/cachingstrategy.dart';
-import 'package:package_info/package_info.dart';
 
 import '../data/interface/mncappsdatainterface.dart';
 import '../data/model/appsmodel.dart';
@@ -25,39 +26,47 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
   List<AppsModel>? items = [];
   LayoutModel? layout;
   MNCAppsDataInterface _dataInterface = MNCAppsDataInterface();
+  LibInterface libInterface = LibInterface();
+
   String? error;
 
   @override
   void initState() {
     super.initState();
+    init();
   }
 
   init() async {
-    LibInterface.currentUserID = widget.userID;
-    LibInterface.cachingStrategy = widget.cachingStrategy ?? CachingStrategy.None;
+    print("Opening MNC Apps");
+    libInterface.currentUserID = widget.userID;
+    libInterface.cachingStrategy = widget.cachingStrategy ?? CachingStrategy.None;
     PackageInfo info = await PackageInfo.fromPlatform();
-    LibInterface.packageName = info.packageName;
-    getData();
+    libInterface.packageName = info.packageName;
+    getData(libInterface);
   }
 
-  getData() async {
+  getData(LibInterface libInterface) async {
     try {
-      final data = await _dataInterface.getDataRepo();
-      setState(() {
-        items = data!.items;
-        layout = data.layoutModel;
-      });
+      final data = await _dataInterface.getDataRepo(libInterface);
+      print(data?.toJson() ?? "JSON Null");
+      items = data!.items;
+      layout = data.layoutModel;
     } catch (e) {
       debugPrint(e.toString());
       error = e.toString();
     }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (items == null) return _ErrorWidget();
-
-    if (items!.isEmpty) {
+    if (error != null) {
+      return _ErrorWidget(
+        cause: error,
+        libInterface: libInterface,
+      );
+    }
+    if (items?.isEmpty ?? true) {
       return Container();
     }
 
@@ -93,6 +102,13 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
 }
 
 class _ErrorWidget extends StatelessWidget {
+  final String? cause;
+  final LibInterface? libInterface;
+  const _ErrorWidget({
+    Key? key,
+    this.cause,
+    this.libInterface,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -110,11 +126,18 @@ class _ErrorWidget extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Error Getting data',
+              'Error Getting data ${kDebugMode ? cause ?? "" : ""}',
               style: Theme.of(context).textTheme.headline6,
             ),
+            if (kDebugMode)
+              Column(
+                children: <Widget>[
+                  Text(libInterface?.currentUserID ?? ""),
+                  Text(libInterface?.packageName ?? ""),
+                ],
+              ),
             Text(
-              'Try Again Data',
+              'Try Again later',
               style: Theme.of(context).textTheme.caption,
             ),
           ],

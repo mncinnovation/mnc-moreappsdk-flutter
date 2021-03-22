@@ -14,14 +14,14 @@ class ResponseData {
   Map<String, dynamic> toMap() {
     return {
       'items': items?.map((x) => x.toMap()).toList(),
-      'layoutModel': layoutModel?.toMap(),
+      'layout': layoutModel?.toMap(),
     };
   }
 
   factory ResponseData.fromMap(Map<String, dynamic> map) {
     return ResponseData(
       items: List<AppsModel>.from(map['items']?.map((x) => AppsModel.fromMap(x))),
-      layoutModel: LayoutModel.fromMap(map['layoutModel']),
+      layoutModel: LayoutModel.fromMap(map['layout']),
     );
   }
 

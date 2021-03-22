@@ -5,11 +5,15 @@ import '../service/service.dart';
 import '../sharepref/sharedpref.dart';
 
 abstract class Repo with SharedPref, Service {
-  Future<ResponseData?> getDataRepo() async {
+  Future<ResponseData?> getDataRepo(LibInterface? libInterface) async {
     try {
-      if (LibInterface.cachingStrategy == CachingStrategy.None) {
+      if (libInterface == null) {
+        throw "Please input user id";
+      }
+      print("[MNC Apps] Calling data");
+      if (libInterface.cachingStrategy == CachingStrategy.None) {
         //Network
-        final data = await getDataNetwork(LibInterface.currentUserID, LibInterface.packageName);
+        final data = await getDataNetwork(libInterface.currentUserID, libInterface.packageName);
         await setDataSavedTimeSP();
         await setDataSP(data);
         return data;
@@ -18,16 +22,16 @@ abstract class Repo with SharedPref, Service {
       final lastSaved = await getDataSavedTimeSP();
       if (lastSaved == null) {
         //Network
-        final data = await getDataNetwork(LibInterface.currentUserID, LibInterface.packageName);
+        final data = await getDataNetwork(libInterface.currentUserID, libInterface.packageName);
         await setDataSavedTimeSP();
         await setDataSP(data);
         return data;
       }
 
-      final lastDay = DateTime.now().add(LibInterface.cachingStrategy.getDuration());
-      if ((lastDay.day - lastSaved.day) > LibInterface.cachingStrategy.getValue()) {
+      final lastDay = DateTime.now().add(libInterface.cachingStrategy.getDuration());
+      if ((lastDay.day - lastSaved.day) > libInterface.cachingStrategy.getValue()) {
         //Network
-        final data = await getDataNetwork(LibInterface.currentUserID, LibInterface.packageName);
+        final data = await getDataNetwork(libInterface.currentUserID, libInterface.packageName);
         await setDataSavedTimeSP();
         await setDataSP(data);
         return data;
