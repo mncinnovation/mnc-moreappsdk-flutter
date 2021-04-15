@@ -40,7 +40,8 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
   init() async {
     print("Opening MNC Apps");
     libInterface.currentUserID = widget.userID;
-    libInterface.cachingStrategy = widget.cachingStrategy ?? CachingStrategy.None;
+    libInterface.cachingStrategy =
+        widget.cachingStrategy ?? CachingStrategy.None;
     PackageInfo info = await PackageInfo.fromPlatform();
     libInterface.packageName = info.packageName;
     getData(libInterface);

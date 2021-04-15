@@ -41,8 +41,10 @@ class _MNCAppsScreenState extends State<MNCAppsScreen> {
           appBar: AppBar(
             backgroundColor: Theme.of(context).canvasColor,
             elevation: 0,
-            iconTheme: IconThemeData(color: isLight ? Colors.black : Colors.white),
-            title: Image.network(Constant.mnclogotext, width: 100, color: isLight ? Colors.black : Colors.white),
+            iconTheme:
+                IconThemeData(color: isLight ? Colors.black : Colors.white),
+            title: Image.network(Constant.mnclogotext,
+                width: 100, color: isLight ? Colors.black : Colors.white),
           ),
           body: MNCAppsBody(
             userID: widget.userID,

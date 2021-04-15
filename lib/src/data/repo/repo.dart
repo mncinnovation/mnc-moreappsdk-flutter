@@ -13,7 +13,8 @@ abstract class Repo with SharedPref, Service {
       print("[MNC Apps] Calling data");
       if (libInterface.cachingStrategy == CachingStrategy.None) {
         //Network
-        final data = await getDataNetwork(libInterface.currentUserID, libInterface.packageName);
+        final data = await getDataNetwork(
+            libInterface.currentUserID, libInterface.packageName);
         await setDataSavedTimeSP();
         await setDataSP(data);
         return data;
@@ -22,16 +23,20 @@ abstract class Repo with SharedPref, Service {
       final lastSaved = await getDataSavedTimeSP();
       if (lastSaved == null) {
         //Network
-        final data = await getDataNetwork(libInterface.currentUserID, libInterface.packageName);
+        final data = await getDataNetwork(
+            libInterface.currentUserID, libInterface.packageName);
         await setDataSavedTimeSP();
         await setDataSP(data);
         return data;
       }
 
-      final lastDay = DateTime.now().add(libInterface.cachingStrategy.getDuration());
-      if ((lastDay.day - lastSaved.day) > libInterface.cachingStrategy.getValue()) {
+      final lastDay =
+          DateTime.now().add(libInterface.cachingStrategy.getDuration());
+      if ((lastDay.day - lastSaved.day) >
+          libInterface.cachingStrategy.getValue()) {
         //Network
-        final data = await getDataNetwork(libInterface.currentUserID, libInterface.packageName);
+        final data = await getDataNetwork(
+            libInterface.currentUserID, libInterface.packageName);
         await setDataSavedTimeSP();
         await setDataSP(data);
         return data;

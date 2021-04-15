@@ -44,5 +44,6 @@ class LayoutModel {
 
   String toJson() => json.encode(toMap());
 
-  factory LayoutModel.fromJson(String source) => LayoutModel.fromMap(json.decode(source));
+  factory LayoutModel.fromJson(String source) =>
+      LayoutModel.fromMap(json.decode(source));
 }

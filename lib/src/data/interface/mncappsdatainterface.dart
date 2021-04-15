@@ -4,5 +4,6 @@ import '../model/responsedata.dart';
 import '../repo/repo.dart';
 
 class MNCAppsDataInterface extends Repo {
-  Future<ResponseData?> getData(LibInterface libInterface) => getDataRepo(libInterface);
+  Future<ResponseData?> getData(LibInterface libInterface) =>
+      getDataRepo(libInterface);
 }

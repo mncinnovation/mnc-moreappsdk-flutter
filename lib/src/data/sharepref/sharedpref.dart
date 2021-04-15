@@ -37,7 +37,8 @@ mixin SharedPref {
   Future<void> setDataSavedTimeSP() async {
     try {
       SharedPreferences sp = await SharedPreferences.getInstance();
-      await sp.setString(Constant.sharedPrefLastSaved, DateTime.now().toIso8601String());
+      await sp.setString(
+          Constant.sharedPrefLastSaved, DateTime.now().toIso8601String());
     } catch (e) {
       rethrow;
     }

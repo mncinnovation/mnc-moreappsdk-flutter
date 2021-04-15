@@ -60,7 +60,8 @@ class AppsModel {
 
   String toJson() => json.encode(toMap());
 
-  factory AppsModel.fromJson(String source) => AppsModel.fromMap(json.decode(source));
+  factory AppsModel.fromJson(String source) =>
+      AppsModel.fromMap(json.decode(source));
 }
 
 class AppMeta {
@@ -87,7 +88,8 @@ class AppMeta {
 
   String toJson() => json.encode(toMap());
 
-  factory AppMeta.fromJson(String source) => AppMeta.fromMap(json.decode(source));
+  factory AppMeta.fromJson(String source) =>
+      AppMeta.fromMap(json.decode(source));
 }
 
 class Translation {
@@ -114,5 +116,6 @@ class Translation {
 
   String toJson() => json.encode(toMap());
 
-  factory Translation.fromJson(String source) => Translation.fromMap(json.decode(source));
+  factory Translation.fromJson(String source) =>
+      Translation.fromMap(json.decode(source));
 }

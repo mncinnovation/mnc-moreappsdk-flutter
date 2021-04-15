@@ -21,19 +21,24 @@ mixin ButtonUtils {
     return false;
   }
 
-  Future<String> getButtonLabel({required AppsModel data, bool? installed}) async {
+  Future<String> getButtonLabel(
+      {required AppsModel data, bool? installed}) async {
     if (data.open == 'web') return 'OPEN';
     return installed! ? "OPEN" : "INSTALL";
   }
 
-  Future<void> openFunction({BuildContext? context, AppsModel? data, bool? installed}) async {
+  Future<void> openFunction(
+      {BuildContext? context, AppsModel? data, bool? installed}) async {
     if (Platform.isAndroid) {
       if (data!.open == 'store') {
         launch(data.android!.store!);
         return;
       }
       if (data.open == 'web') {
-        Navigator.push(context!, MaterialPageRoute(builder: (context) => MncAppsInAppWebview(url: data.webUrl)));
+        Navigator.push(
+            context!,
+            MaterialPageRoute(
+                builder: (context) => MncAppsInAppWebview(url: data.webUrl)));
         return;
       }
       if (data.open == 'app') {
@@ -54,7 +59,10 @@ mixin ButtonUtils {
         return;
       }
       if (data.open == 'web') {
-        Navigator.push(context!, MaterialPageRoute(builder: (context) => MncAppsInAppWebview(url: data.webUrl)));
+        Navigator.push(
+            context!,
+            MaterialPageRoute(
+                builder: (context) => MncAppsInAppWebview(url: data.webUrl)));
         return;
       }
       if (data.open == 'app') {

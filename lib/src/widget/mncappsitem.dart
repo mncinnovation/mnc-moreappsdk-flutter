@@ -26,7 +26,8 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
 
   init() async {
     installed = await getInstalledStatus(data: widget.data);
-    butttonText = await getButtonLabel(data: widget.data!, installed: installed);
+    butttonText =
+        await getButtonLabel(data: widget.data!, installed: installed);
     setState(() {});
   }
 
@@ -37,11 +38,16 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         width: double.maxFinite,
         decoration: BoxDecoration(
-          color: Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.grey[850],
-          borderRadius: widget.layoutModel?.cardRoundedSize?.getRoundSize() ?? BorderRadius.circular(4.0),
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : Colors.grey[850],
+          borderRadius: widget.layoutModel?.cardRoundedSize?.getRoundSize() ??
+              BorderRadius.circular(4.0),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).brightness == Brightness.light ? Colors.grey[200]! : Colors.black38,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey[200]!
+                  : Colors.black38,
               spreadRadius: 1,
               blurRadius: 4,
               offset: Offset(0, 3), // changes position of shadow
@@ -69,7 +75,9 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).brightness == Brightness.light ? Colors.black87 : Colors.white,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black87
+                          : Colors.white,
                     ),
                   ),
                   SizedBox(height: 4),
@@ -77,7 +85,9 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
                     widget.data?.description?.id ?? "Desc",
                     style: TextStyle(
                       fontSize: 10,
-                      color: Theme.of(context).brightness == Brightness.light ? Colors.grey[700] : Colors.grey[400],
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.grey[700]
+                          : Colors.grey[400],
                     ),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -87,21 +97,29 @@ class _MoreAppsItemState extends State<MoreAppsItem> with ButtonUtils {
             ),
             Container(
               margin: EdgeInsets.only(left: 8),
+              height: 40,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(widget.layoutModel?.buttonColor != null ? HexColor.fromHex(widget.layoutModel!.buttonColor!) : Colors.blue),
+                  backgroundColor: MaterialStateProperty.all(
+                      widget.layoutModel?.buttonColor != null
+                          ? HexColor.fromHex(widget.layoutModel!.buttonColor!)
+                          : Colors.blue),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
-                      borderRadius: widget.layoutModel?.buttonRoundedSize?.getRoundSize() ?? BorderRadius.circular(4.0),
+                      borderRadius: widget.layoutModel?.buttonRoundedSize
+                              ?.getRoundSize() ??
+                          BorderRadius.circular(4.0),
                     ),
                   ),
                 ),
-                onPressed: () => openFunction(context: context, installed: installed, data: widget.data),
+                onPressed: () => openFunction(
+                    context: context, installed: installed, data: widget.data),
                 child: Text(
                   butttonText,
                   maxLines: 1,
                   style: TextStyle(
-                    color: HexColor.fromHex(widget.layoutModel?.buttonTextColor ?? "FFFFFF"),
+                    color: HexColor.fromHex(
+                        widget.layoutModel?.buttonTextColor ?? "FFFFFF"),
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),

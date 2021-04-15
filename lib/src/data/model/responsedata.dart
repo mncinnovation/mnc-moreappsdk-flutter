@@ -20,12 +20,14 @@ class ResponseData {
 
   factory ResponseData.fromMap(Map<String, dynamic> map) {
     return ResponseData(
-      items: List<AppsModel>.from(map['items']?.map((x) => AppsModel.fromMap(x))),
+      items:
+          List<AppsModel>.from(map['items']?.map((x) => AppsModel.fromMap(x))),
       layoutModel: LayoutModel.fromMap(map['layout']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ResponseData.fromJson(String source) => ResponseData.fromMap(json.decode(source));
+  factory ResponseData.fromJson(String source) =>
+      ResponseData.fromMap(json.decode(source));
 }
