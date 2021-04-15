@@ -72,7 +72,7 @@ class _MNCAppsBodyState extends State<MNCAppsBody> {
     }
 
     return LayoutBuilder(builder: (context, constraint) {
-      if (constraint.maxWidth > 400) {
+      if (constraint.maxWidth > 500) {
         return GridView.builder(
           gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
