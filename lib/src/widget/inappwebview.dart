@@ -1,8 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../data/constant/constant.dart';
+
+// Import for iOS features.
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+// #enddocregion platform_imports
 
 class MncAppsInAppWebview extends StatefulWidget {
   final String? url;
@@ -14,11 +16,40 @@ class MncAppsInAppWebview extends StatefulWidget {
 class _MncAppsInAppWebviewState extends State<MncAppsInAppWebview> {
   bool loading = true;
   bool isLight = true;
+  late final WebViewController _controller;
+  PlatformWebViewControllerCreationParams params =
+      const PlatformWebViewControllerCreationParams();
 
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+
+    late final PlatformWebViewControllerCreationParams params;
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      params = WebKitWebViewControllerCreationParams(
+        allowsInlineMediaPlayback: true,
+        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+      );
+    } else {
+      params = const PlatformWebViewControllerCreationParams();
+    }
+
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(NavigationDelegate(onPageFinished: (url) async {
+        await Future.delayed(Duration(seconds: 1));
+        setState(() {
+          loading = false;
+        });
+      }, onPageStarted: (url) {
+        setState(() {
+          loading = true;
+        });
+      }))
+      ..loadRequest(Uri.parse(widget.url ?? ''));
+    _controller = controller;
   }
 
   @override
@@ -40,21 +71,7 @@ class _MncAppsInAppWebviewState extends State<MncAppsInAppWebview> {
         children: [
           if (loading) LinearProgressIndicator(),
           Expanded(
-            child: WebView(
-              initialUrl: widget.url,
-              javascriptMode: JavascriptMode.unrestricted,
-              onPageFinished: (url) async {
-                await Future.delayed(Duration(seconds: 1));
-                setState(() {
-                  loading = false;
-                });
-              },
-              onPageStarted: (url) {
-                setState(() {
-                  loading = true;
-                });
-              },
-            ),
+            child: WebViewWidget(controller: _controller),
           ),
         ],
       ),
