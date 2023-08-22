@@ -68,6 +68,7 @@ mixin ButtonUtils {
       if (data.open == 'app') {
         if (installed!) {
           launchUrlString(data.ios!.scheme!);
+          return;
         }
         launchUrlString(data.ios!.store!);
         return;
