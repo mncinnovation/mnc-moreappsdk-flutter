@@ -55,7 +55,20 @@ The Schemes may **change** or will be **added** more.
 
 #### Android
 
-Good to go, nothing to add.
+you must add package name for specific external app into tag **queries** on root element in file AndroidManifest.xml
+
+example :
+   
+    <manifest ...>
+        <queries>
+            <package android:name="com.example.okezone" />
+            <package android:name="com.example.inews" />
+            <package android:name="com.example.android" />
+        </queries>
+        ...
+    </manifest>
+
+this scheme needed to interact with apps other than the ones that are visible automatically, if your app target Android 11 or higher.
 
 ### [](#3-import)3. Import it
 

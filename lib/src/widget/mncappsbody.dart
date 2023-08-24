@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 
 import 'package:mncapps/src/data/interface/libinterface.dart';
 import 'package:mncapps/src/data/model/cachingstrategy.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../data/interface/mncappsdatainterface.dart';
 import '../data/model/appsmodel.dart';
@@ -129,7 +129,7 @@ class _ErrorWidget extends StatelessWidget {
             SizedBox(height: 8),
             Text(
               'Error Getting data ${kDebugMode ? cause ?? "" : ""}',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.labelMedium,
             ),
             if (kDebugMode)
               Column(
@@ -140,7 +140,7 @@ class _ErrorWidget extends StatelessWidget {
               ),
             Text(
               'Try Again later',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ],
         ),

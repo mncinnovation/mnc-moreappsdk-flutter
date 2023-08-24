@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mncapps/mncapps.dart';
-import 'package:mncapps/src/data/model/cachingstrategy.dart';
 
 void main() {
   runApp(MaterialApp(
